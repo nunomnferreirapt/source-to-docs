@@ -45,7 +45,7 @@ The judgment between steps 3 and 4, which gaps are real and what to write, is do
 
 ## Why this exists
 
-The pattern comes from an AI operating system built for a company's go-to-market. There, three public documentation sites were rebuilt from help files, support threads and demo transcripts this way. Every change went through a pull request, and a weekly drift watch kept the sites honest. The system is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine). This repo is a fresh, generic rebuild of the pattern; the original stayed with the company it was built for.
+We rebuilt three public documentation sites this way, from help files, support threads and demo transcripts, every change in a pull request and a weekly drift watch on top. This is the pattern, rebuilt fresh in October 2026 on an invented product; the originals stayed where they were built. The system it came from is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine).
 
 ## Requirements
 
