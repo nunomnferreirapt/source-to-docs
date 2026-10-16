@@ -2,7 +2,7 @@
 
 Turns a call transcript, a support thread or a spec into documentation changes you review in a pull request, then watches the docs for drift.
 
-Preview:
+## Preview
 
 ```
 $ source-to-docs scrub sources/support-thread.md --out clean --names names.txt
@@ -45,7 +45,7 @@ The judgment between steps 3 and 4, which gaps are real and what to write, is do
 
 ## Why this exists
 
-The pattern comes from an AI operating system that ran a company's go-to-market. There, three public documentation sites were rebuilt from help files, support threads and demo transcripts this way. Every change went through a pull request, and a weekly drift watch kept the sites honest. The system is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine). This repo is a fresh, generic rebuild of the pattern; the original stayed with the company it was built for.
+The pattern comes from an AI operating system built for a company's go-to-market. There, three public documentation sites were rebuilt from help files, support threads and demo transcripts this way. Every change went through a pull request, and a weekly drift watch kept the sites honest. The system is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine). This repo is a fresh, generic rebuild of the pattern; the original stayed with the company it was built for.
 
 ## Requirements
 
