@@ -1,6 +1,6 @@
 # source-to-docs
 
-Turns a call transcript, a support thread or a spec into documentation changes you review in a pull request, and watches the docs for drift afterwards.
+Turns a call transcript, a support thread or a spec into documentation changes you review in a pull request, then watches the docs for drift.
 
 Preview:
 
@@ -41,18 +41,18 @@ committed 3 file(s) on branch docs/photo-bundle; dry run, no pull request opened
 4. `propose`: creates a branch, commits the changed pages and prints a pull request body with provenance and a reviewer checklist. Dry run by default, never merges, refuses `main`.
 5. `drift`: re-runs the matching for every clean source and reports gaps closed, still open and new since the last run.
 
-The judgment between step 3 and step 4, which gaps are real and what to write, is done by a person or by the Claude Code skill in `skill/`.
+The judgment between steps 3 and 4, which gaps are real and what to write, is done by a person or by the Claude Code skill in `skill/`.
 
 ## Why this exists
 
-The pattern comes from an AI operating system that ran a company's go-to-market. There, three public documentation sites were rebuilt from help files, support threads and demo transcripts this way. Every change went through a pull request, and a weekly drift watch kept the sites honest. That system is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine). This repo is a fresh, generic rebuild of the pattern; the original stayed with the company it was built for.
+The pattern comes from an AI operating system that ran a company's go-to-market. There, three public documentation sites were rebuilt from help files, support threads and demo transcripts this way. Every change went through a pull request, and a weekly drift watch kept the sites honest. The system is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine). This repo is a fresh, generic rebuild of the pattern; the original stayed with the company it was built for.
 
 ## Requirements
 
 - Python 3.12 or later
 - git
-- `gh` (GitHub CLI), only for `propose --open-pr`
-- `uv` for the install below, or plain `pip`
+- `gh`, only for `propose --open-pr`
+- `uv`, or plain `pip`
 
 ## Install
 
@@ -63,7 +63,7 @@ uv sync
 uv run source-to-docs --help
 ```
 
-To have `source-to-docs` on your path, `uv tool install .` or `pip install .` from the repo folder. Tests: `uv run pytest`.
+For the command on your path: `uv tool install .` or `pip install .`. Tests: `uv run pytest`.
 
 ## Usage
 
@@ -77,15 +77,15 @@ source-to-docs propose docs --branch docs/call --title "docs: ..." --provenance 
 source-to-docs drift docs --sources clean
 ```
 
-In Claude Code, after installing the skill (see `skill/README.md`): `/source-to-docs update the docs from raw/call.txt`. The skill scrubs, runs the gap pass, decides, drafts, writes the provenance and runs `propose` as a dry run.
+In Claude Code, with the skill installed (`skill/README.md`): `/source-to-docs update the docs from raw/call.txt`. The skill scrubs, runs the gap pass, decides, drafts, writes the provenance and runs `propose` as a dry run.
 
-A full session with real output: `examples/northwind/WALKTHROUGH.md`.
+A full session with its output: `examples/northwind/WALKTHROUGH.md`.
 
 ## How it works
 
-Scrub runs first and alone, with regular expressions, so no model sees an email, a phone number or a name. The gap pass is deterministic: it tokenizes the clean source and the docs, removes stopwords, and scores each source block by the share of its keywords found under a docs heading. Low scores are candidate gaps, and the report names the closest pages so a reader can check in a minute. The judgment and the writing happen after that, and `propose` turns the result into a branch, a commit and a pull request body that carries the quotes behind each change and a checklist for the reviewer.
+Scrub runs first and alone, with regular expressions, so no model sees an email, a phone number or a name. The gap pass is deterministic: it tokenizes the clean source and the docs, drops stopwords, and scores each source block by the share of its keywords found under a docs heading. Low scores are candidate gaps; the report names the closest pages. Judgment and writing come after that, and `propose` turns the result into a branch, a commit and a pull request body with the quotes behind each change and a reviewer checklist.
 
-The drift watch is the same matching, run again later against the current docs, compared with the stored result in `.source-to-docs/drift.json`. A gap that scores above the threshold now was closed; one below is still open; a block that fell below for the first time is new. It only reports, with exit code 0, so it can run on a schedule without blocking anything.
+The drift watch is the same matching run again against the current docs and compared with `.source-to-docs/drift.json`. A gap now above the threshold was closed; one below is still open; a block below it for the first time is new. It only reports, exit code 0, so it can run on a schedule without blocking anything.
 
 ## Repository layout
 
