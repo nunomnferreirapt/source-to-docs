@@ -18,11 +18,13 @@ STOPWORDS: frozenset[str] = frozenset(
     with would you your yours yourself yourselves
     yeah yes okay ok right thanks thank hi hello please sure well really think know
     going want need one two three new also something anything thing things way
-    make makes made see look looking said say says take back
+    make makes made see look looking said say says take back last asked getting worked
+    told went put lot much many every someone another else around already
     """.split()
 )
 
 _TOKEN = re.compile(r"[a-z][a-z0-9\-]{2,}")
+_PLACEHOLDER = re.compile(r"^person-\d+$")
 
 
 def normalize(token: str) -> str:
@@ -38,7 +40,7 @@ def tokenize(text: str) -> list[str]:
     tokens = []
     for raw in _TOKEN.findall(text.lower()):
         token = normalize(raw)
-        if len(token) < 3 or token in STOPWORDS:
+        if len(token) < 3 or token in STOPWORDS or _PLACEHOLDER.match(token):
             continue
         tokens.append(token)
     return tokens
