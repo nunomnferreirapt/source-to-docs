@@ -1,0 +1,36 @@
+[project]
+name = "source-to-docs"
+version = "0.1.0"
+description = "From a transcript, a support thread or a spec to a reviewable docs pull request, with a drift watch and no merge without a person"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Nuno Ferreira" }]
+requires-python = ">=3.12"
+dependencies = []
+keywords = ["documentation", "docs-as-code", "pull-requests", "ai-agents", "claude-code"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Documentation",
+]
+
+[project.scripts]
+source-to-docs = "source_to_docs.cli:main"
+
+[project.urls]
+Repository = "https://github.com/nunomnferreirapt/source-to-docs"
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/source_to_docs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
