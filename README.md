@@ -4,7 +4,7 @@ Turns a call transcript, a support thread or a spec into documentation changes y
 
 ## Preview
 
-```
+```text
 $ source-to-docs scrub sources/support-thread.md --out clean --names names.txt
 wrote clean/support-thread.md (email: 3, phone: 1, url: 1, person: 8)
 
@@ -35,6 +35,23 @@ committed 3 file(s) on branch docs/photo-bundle; dry run, no pull request opened
 
 ## What it does
 
+```mermaid
+%%{init: {"flowchart": {"wrappingWidth": 600, "nodeSpacing": 30, "rankSpacing": 32}}}%%
+flowchart TB
+    RAW["A raw source: call transcript, support thread, spec"]:::sys
+    RAW --> SC["scrub, regular expressions only: emails, phones, URLs, listed names out"]:::sys
+    SC --> GP["gaps, no model: each source block scored against the docs index"]:::sys
+    GP --> J(["A person, or the Claude skill: which gaps are real, what to write"]):::human
+    J --> SK["`**Claude skill** drafts the pages and the provenance note`"]:::sys
+    SK --> PR["propose: a branch, a commit, a PR body with the quotes behind each change"]:::out
+    PR --> M(["A person reviews the pull request and merges"]):::human
+    M --> DR["drift, on a schedule: gaps closed, still open, new; reports only"]:::out
+    DR -.-> GP
+    classDef sys fill:#1f3a5f,stroke:#7aa2d8,color:#ffffff
+    classDef human fill:#6b4514,stroke:#e0a95a,color:#ffffff
+    classDef out fill:#1e4d3a,stroke:#6fcf97,color:#ffffff
+```
+
 1. `scrub`: replaces emails, phone numbers, URLs with tokens and listed names with placeholders before any model reads the file.
 2. `index`: lists every markdown page, its headings and the keywords under each heading.
 3. `gaps`: splits a clean source into blocks, matches each block against the index and lists the blocks the docs do not cover.
@@ -47,7 +64,7 @@ The judgment between steps 3 and 4, which gaps are real and what to write, is do
 
 ## Why this exists
 
-We rebuilt three public documentation sites this way, from help files, support threads and demo transcripts, every change in a pull request and a weekly drift watch on top. This is the pattern, rebuilt fresh in October 2026 on an invented product; the originals stayed where they were built. The system it came from is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine).
+We rebuilt three public documentation sites this way, from help files, support threads and demo transcripts, every change in a pull request and a weekly drift watch on top. This is the pattern, rebuilt fresh in October 2026 on an invented product; the originals stayed where they were built. The story is [Docs as code, three sites](https://github.com/nunomnferreirapt/ai-operated-growth-engine/blob/main/evidence/case-studies/04-docs-as-code-three-sites.md) and the mechanism is [Drift watch](https://github.com/nunomnferreirapt/ai-operated-growth-engine/blob/main/architecture/patterns/drift-watch.md), both in the showcase it came from.
 
 ## Requirements
 
@@ -58,7 +75,7 @@ We rebuilt three public documentation sites this way, from help files, support t
 
 ## Install
 
-```
+```bash
 git clone https://github.com/nunomnferreirapt/source-to-docs.git
 cd source-to-docs
 uv sync
@@ -71,7 +88,7 @@ For the command on your path: `uv tool install .` or `pip install .`. Tests: `uv
 
 CLI, in a docs repo:
 
-```
+```bash
 source-to-docs scrub raw/call.txt --out clean --names names.txt
 source-to-docs gaps clean/call.md docs --out clean/gaps-call.md
 # write the doc changes and docs/.source-to-docs/provenance.md
@@ -91,7 +108,7 @@ The drift watch is the same matching run again against the current docs and comp
 
 ## Repository layout
 
-```
+```text
 source-to-docs/
   src/source_to_docs/
     cli.py        argparse entry point
