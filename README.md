@@ -1,6 +1,6 @@
 # source-to-docs
 
-Turns a call transcript, a support thread or a spec into documentation changes you review in a pull request, then watches the docs for drift.
+Turns a call transcript, a support thread or a spec into documentation changes you review in a pull request, then watches the docs for drift. A full session with its output: [`examples/northwind/WALKTHROUGH.md`](examples/northwind/WALKTHROUGH.md).
 
 ## Preview
 
@@ -43,6 +43,8 @@ committed 3 file(s) on branch docs/photo-bundle; dry run, no pull request opened
 
 The judgment between steps 3 and 4, which gaps are real and what to write, is done by a person or by the Claude Code skill in `skill/`.
 
+**Constraints:** scrub runs before any model reads a file. Propose is a dry run by default, never merges, and refuses `main`. Drift only reports.
+
 ## Why this exists
 
 We rebuilt three public documentation sites this way, from help files, support threads and demo transcripts, every change in a pull request and a weekly drift watch on top. This is the pattern, rebuilt fresh in October 2026 on an invented product; the originals stayed where they were built. The system it came from is described in [ai-operated-growth-engine](https://github.com/nunomnferreirapt/ai-operated-growth-engine).
@@ -81,7 +83,7 @@ In Claude Code, with the skill installed (`skill/README.md`): `/source-to-docs u
 
 A full session with its output: `examples/northwind/WALKTHROUGH.md`.
 
-## How it works
+## How the gap pass works without a model
 
 Scrub runs first and alone, with regular expressions, so no model sees an email, a phone number or a name. The gap pass is deterministic: it tokenizes the clean source and the docs, drops stopwords, and scores each source block by the share of its keywords found under a docs heading. Low scores are candidate gaps; the report names the closest pages. Judgment and writing come after that, and `propose` turns the result into a branch, a commit and a pull request body with the quotes behind each change and a reviewer checklist.
 
