@@ -26,6 +26,6 @@ Marcus Oyelaran: Last one. We have about 40 forms built in another tool. Can we 
 
 Sales: There is a form import from a JSON or XLSForm file. Under Forms, choose Import, and pick the file. Field types map automatically where possible and you get a report of anything that needs attention before the form is saved. If you send me a sample at sales@northwind.example I can run it with you. You can also reach me on +1 (415) 555-0142.
 
-Lena Vogt: Perfect. I will send one over, lena.vogt@example-infra.com is my address for the follow-up.
+Lena Vogt: Perfect. I will send one over, lena.vogt@infra.example is my address for the follow-up.
 
 Sales: Great. I will send the summary by Monday.

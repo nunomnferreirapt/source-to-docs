@@ -31,7 +31,7 @@ photos named after the record id and the field short name. A download link by em
 
 From: Support
 
-Yes, the photo bundle is under Exports. Call Priya on +31 6 1234 5678 if the link https://files.example.com/d?token=abc123 fails.
+Yes, the photo bundle is under Exports. Call Priya on +1 (415) 555-0199 if the link https://files.example.com/d?token=abc123 fails.
 
 ## Sync status question
 

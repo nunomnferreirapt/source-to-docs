@@ -11,7 +11,7 @@ def test_emails_are_replaced_and_counted():
 
 
 def test_phone_numbers_in_common_formats_are_replaced():
-    text = "Call +31 6 1234 5678, +1 (415) 555-0142 or 020 123 4567. Not 1,400 photos or Android 10."
+    text = "Call +1 (415) 555-0199, +1 (415) 555-0142 or 020 123 4567. Not 1,400 photos or Android 10."
     result = scrub_text(text)
     assert result.text == "Call [phone], [phone] or [phone]. Not 1,400 photos or Android 10."
     assert result.counts["phone"] == 3

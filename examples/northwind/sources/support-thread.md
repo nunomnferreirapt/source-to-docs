@@ -1,9 +1,9 @@
 Subject: Getting all photos out of a project at once
 
-From: Priya Ramaswamy <priya.ramaswamy@example-survey.com>
+From: Priya Ramaswamy <priya.ramaswamy@survey.example>
 To: support@northwind.example
 
-Hi, we finished the drainage survey last week and the client wants all the photos. There are about 1,400 photos across 3 forms. Downloading them one by one from each record is not possible for us. Is there a way to export all photos from a project in one go? Our project manager Tomás Herrera (tomas.herrera@example-survey.com, +31 6 1234 5678) asked me to sort this out before Friday.
+Hi, we finished the drainage survey last week and the client wants all the photos. There are about 1,400 photos across 3 forms. Downloading them one by one from each record is not possible for us. Is there a way to export all photos from a project in one go? Our project manager Tomás Herrera (tomas.herrera@survey.example, +1 (415) 555-0199) asked me to sort this out before Friday.
 
 From: Support
 To: Priya Ramaswamy
