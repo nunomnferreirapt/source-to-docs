@@ -52,6 +52,8 @@ flowchart TB
     classDef out fill:#1e4d3a,stroke:#6fcf97,color:#ffffff
 ```
 
+<img src="assets/diagram-key.svg" alt="Key: rounded amber, a person decides or acts; navy, a step a system runs; Claude in bold, a step Claude runs; green, what comes out">
+
 1. `scrub`: replaces emails, phone numbers, URLs with tokens and listed names with placeholders before any model reads the file.
 2. `index`: lists every markdown page, its headings and the keywords under each heading.
 3. `gaps`: splits a clean source into blocks, matches each block against the index and lists the blocks the docs do not cover.
